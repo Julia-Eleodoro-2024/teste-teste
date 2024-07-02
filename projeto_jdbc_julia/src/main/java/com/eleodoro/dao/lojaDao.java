@@ -1,4 +1,3 @@
-package com.eleodoro.dao;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,10 +22,9 @@ public class lojaDao{
     public boolean incluir(){
          try {
             PreparedStatement ps = Conexao.getConexao () .prepareStatement(SQLINCLUIR);
-            ps.setInt(1, loja.getId());
-            ps.setString(2, loja.getCliente());
-            ps.setInt(3, loja.getId());
-            ps.setString(4, loja.getMarca());
+            ps.setString(1, loja.getCliente());
+            ps.setInt(2, loja.getId());
+            ps.setString(3, loja.getMarca());
             ps.executeUpdate();
             return true;
          } catch (SQLException e) {
@@ -39,10 +37,9 @@ public class lojaDao{
     public boolean alterar(){
         try {
            PreparedStatement ps = Conexao.getConexao () .prepareStatement(SQLALTERAR);
-           ps.setInt(1, loja.getId());
-           ps.setString(2, loja.getCliente());
-           ps.setInt(3, loja.getId());
-           ps.setString(4, loja.getMarca());
+           ps.setString(1, loja.getCliente());
+           ps.setInt(2, loja.getId());
+           ps.setString(3, loja.getMarca());
            ps.executeUpdate();
            return true;
         } catch (SQLException e) {
@@ -55,7 +52,7 @@ public class lojaDao{
    public boolean excluir(){
     try {
        PreparedStatement ps = Conexao.getConexao () .prepareStatement(SQLEXCLUIR);
-       ps.setInt(1, loja.getId());
+       ps.setString(1, loja.getCliente());
        ps.executeUpdate();
        return true;
     } catch (SQLException e) {
@@ -68,11 +65,11 @@ public class lojaDao{
 public boolean consultar(){
     try {
        PreparedStatement ps = Conexao.getConexao () .prepareStatement(SQLCONSULTAR);
-       ps.setInt(1, loja.getId());
+       ps.setString(1, loja.getCliente());
        ResultSet rs = ps.executeQuery();
        if (rs.next()) {
-        loja.setCliente(rs.getString(2));
-        loja.setId(rs.getInt(3));
+        loja.setId(rs.getInt(2));
+        loja.setMarca(rs.getString(3));
        }
        ps.executeUpdate();
        return true;
